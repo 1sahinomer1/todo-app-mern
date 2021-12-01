@@ -11,7 +11,7 @@ import { formValidations } from 'utils';
 
 import * as S from 'styles/Pages/Register';
 
-const Register = () => {
+const Login = () => {
   interface IFormInputs {
     fullname: string;
     email: string;
@@ -67,4 +67,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
