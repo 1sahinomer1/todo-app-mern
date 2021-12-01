@@ -7,9 +7,9 @@ type InputProps = React.DetailedHTMLProps<
   HTMLInputElement
 > & {
   hasValue: string;
-  error: string | undefined;
-  label: string;
-  type: string;
+  error?: string | undefined;
+  label?: string;
+  type?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,9 +23,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <S.StyledInput type={showPassword} ref={ref} {...props} />
           {type === 'password' ? (
             showPassword === 'password' ? (
-              <S.StyledEye onClick={() => setShowPassword('text')} />
+              <S.StyledEye
+                data-testid="eye"
+                onClick={() => setShowPassword('text')}
+              />
             ) : (
-              <S.StyledHiddenEye onClick={() => setShowPassword('password')} />
+              <S.StyledHiddenEye
+                data-testid="hiddedEye"
+                onClick={() => setShowPassword('password')}
+              />
             )
           ) : null}
         </S.InputContainer>
