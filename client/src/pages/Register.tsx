@@ -1,7 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 import * as yup from 'yup';
+
+import { Button, Input } from 'components';
+
+import LoginRegister from 'layouts/LoginRegister/LoginRegister';
+import { formTypes } from 'constants/layouts/loginRegister';
 import { formValidations } from 'utils';
+
+import * as S from 'styles/Pages/Register';
 
 interface IFormInputs {
   fullname: string;
@@ -24,28 +32,58 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IFormInputs>({
     resolver: yupResolver(validationSchema),
   });
-
   const onSubmit = (data: IFormInputs) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('fullname')} />
-      <p>{errors.fullname?.message}</p>
+    <LoginRegister formType={formTypes.REGISTER}>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register('fullname')}
+          type="text"
+          placeholder="Full name"
+          error={errors.fullname?.message}
+          label="Fullname"
+          hasValue={watch('fullname')}
+        />
 
-      <input {...register('email')} />
-      <p>{errors.email?.message}</p>
-      <input {...register('password')} />
-      <p>{errors.password?.message}</p>
-
-      <input {...register('passwordConfirmation')} />
-      <p>{errors.passwordConfirmation?.message}</p>
-
-      <input type="submit" />
-    </form>
+        <Input
+          {...register('email')}
+          type="text"
+          label="Email"
+          placeholder="Email"
+          error={errors.email?.message}
+          hasValue={watch('email')}
+        />
+        <Input
+          {...register('password')}
+          type="password"
+          label="Password"
+          placeholder="Password"
+          error={errors.password?.message}
+          hasValue={watch('password')}
+        />
+        <Input
+          {...register('passwordConfirmation')}
+          type="password"
+          label="Password Again"
+          placeholder="Password Again"
+          error={errors.passwordConfirmation?.message}
+          hasValue={watch('passwordConfirmation')}
+        />
+        <Button>Register</Button>
+        <S.Redirect>
+          Already have Account ?
+          <Link to="/login">
+            <S.LinkText>Sign In</S.LinkText>
+          </Link>
+        </S.Redirect>
+      </S.Form>
+    </LoginRegister>
   );
 };
 
