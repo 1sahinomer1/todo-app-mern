@@ -20,7 +20,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <S.InputWrapper>
         <S.Label>{label}</S.Label>
         <S.InputContainer hasValue={hasValue} error={error}>
-          <S.StyledInput type={showPassword} ref={ref} {...props} />
+          <S.StyledInput
+            data-testid="input"
+            type={showPassword}
+            ref={ref}
+            {...props}
+          />
           {type === 'password' ? (
             showPassword === 'password' ? (
               <S.StyledEye
@@ -35,7 +40,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             )
           ) : null}
         </S.InputContainer>
-        <S.Error>{error}</S.Error>
+        <S.Error data-testid="errorMessage">{error}</S.Error>
       </S.InputWrapper>
     );
   }
