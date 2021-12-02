@@ -59,7 +59,7 @@ const Login = () => {
         <S.Redirect>
           Don't you have an account ?
           <Link to="/register">
-            <S.LinkText>Sign Up</S.LinkText>
+            <S.LinkText data-testid="signupLink">Sign Up</S.LinkText>
           </Link>
         </S.Redirect>
       </S.Form>

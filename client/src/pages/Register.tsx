@@ -75,11 +75,11 @@ const Register = () => {
           error={errors.passwordConfirmation?.message}
           hasValue={watch('passwordConfirmation')}
         />
-        <Button>Register</Button>
+        <Button data-testid="registerBtn">Register</Button>
         <S.Redirect>
           Already have Account ?
           <Link to="/login">
-            <S.LinkText>Sign In</S.LinkText>
+            <S.LinkText data-testid="signInLink">Sign In</S.LinkText>
           </Link>
         </S.Redirect>
       </S.Form>
