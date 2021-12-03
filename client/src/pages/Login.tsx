@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
+import axios from 'axios';
 
 import { Button, Input } from 'components';
 
@@ -34,7 +35,14 @@ const Login = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = async (data: IFormInputs) => {
+    const User = {
+      email: data.email,
+      password: data.password,
+    };
+    const response = await axios.post('/users/login', User);
+    alert(response.data);
+  };
   return (
     <LoginRegister formType={formTypes.LOGIN}>
       <S.Form onSubmit={handleSubmit(onSubmit)}>

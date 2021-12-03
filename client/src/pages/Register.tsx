@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
+import axios from 'axios';
 
 import { Button, Input } from 'components';
 
@@ -19,6 +20,8 @@ interface IFormInputs {
 }
 
 const Register = () => {
+  const history = useHistory();
+
   const validationSchema = yup
     .object()
     .shape({
@@ -37,7 +40,17 @@ const Register = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = async (data: IFormInputs) => {
+    const User = {
+      name: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
+    const response = await axios.post('/users/register', User);
+    alert(response.data);
+    console.log(response.data);
+    history.push('/login');
+  };
 
   return (
     <LoginRegister formType={formTypes.REGISTER}>
