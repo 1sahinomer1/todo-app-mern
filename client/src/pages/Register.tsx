@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import axios from 'axios';
+import { useAppDispatch } from 'store';
 
 import { Button, Input } from 'components';
 
@@ -11,6 +11,7 @@ import { formTypes } from 'constants/layouts/loginRegister';
 import { formValidations } from 'utils';
 
 import * as S from 'styles/Pages/Register';
+import { registerUser } from 'store/userSlice';
 
 interface IFormInputs {
   fullname: string;
@@ -21,6 +22,7 @@ interface IFormInputs {
 
 const Register = () => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const validationSchema = yup
     .object()
@@ -46,10 +48,14 @@ const Register = () => {
       email: data.email,
       password: data.password,
     };
-    const response = await axios.post('/users/register', User);
-    alert(response.data);
-    console.log(response.data);
-    history.push('/login');
+    try {
+      // const response = await axios.post('/users/register', User);
+      // history.push('/login');
+      // console.log(response.data.message);
+      dispatch(registerUser(User));
+    } catch (error) {
+      console.log((error as any).response.data.message);
+    }
   };
 
   return (

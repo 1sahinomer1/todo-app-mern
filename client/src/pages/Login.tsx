@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import axios from 'axios';
 
@@ -11,8 +11,12 @@ import LoginRegister from 'layouts/LoginRegister/LoginRegister';
 import { formValidations } from 'utils';
 
 import * as S from 'styles/Pages/Register';
+import { useAppDispatch } from 'store';
 
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+
   interface IFormInputs {
     fullname: string;
     email: string;
@@ -40,8 +44,13 @@ const Login = () => {
       email: data.email,
       password: data.password,
     };
-    const response = await axios.post('/users/login', User);
-    alert(response.data);
+    try {
+      const response = await axios.post('/users/login', User);
+      history.push('/homepage');
+      console.log(response.data);
+    } catch (error) {
+      console.log((error as any).response.data.message);
+    }
   };
   return (
     <LoginRegister formType={formTypes.LOGIN}>
