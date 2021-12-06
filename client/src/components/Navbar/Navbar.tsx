@@ -1,6 +1,7 @@
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
+import * as S from './styles';
 const Navbar = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['users']);
   const history = useHistory();
@@ -12,11 +13,10 @@ const Navbar = () => {
     }, 3000);
   };
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
-    </div>
+    <S.Navbar>
+      <p>Welcome {cookies.users.user.name} !</p>
+      <S.StyledDoor onClick={logout}>cikis yap </S.StyledDoor>
+    </S.Navbar>
   );
 };
 
