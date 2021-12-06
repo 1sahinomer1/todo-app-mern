@@ -1,11 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import userSlice from './userSlice';
 
 const store = configureStore({
-  reducer: {
-    user: userSlice,
-  }, //oluşturulan slicelardan gelen reducerler girilecek
+  reducer: {}, //oluşturulan slicelardan gelen reducerler girilecek
 });
 
 export default store;
