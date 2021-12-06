@@ -48,7 +48,7 @@ const Login = () => {
     try {
       const response = await axios.post('/users/login', User);
       setTimeout(() => {
-        history.push('/home');
+        history.push('/');
       }, 3000);
       toast.success(response.data.message);
       setCookie('users', response.data, { path: '/' });

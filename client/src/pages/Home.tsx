@@ -1,14 +1,12 @@
 import { Navbar } from 'components';
-import { useCookies } from 'react-cookie';
+
+import * as S from 'styles/Pages/Home';
 
 const Home = () => {
-  const [cookies, setCookie] = useCookies(['users']);
-  console.log(cookies);
   return (
-    <div>
+    <S.Container>
       <Navbar />
-      {cookies.users.user.name}
-    </div>
+    </S.Container>
   );
 };
 
