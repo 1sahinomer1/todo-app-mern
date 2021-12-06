@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
-import { useAppDispatch } from 'store';
 
 import { Button, Input } from 'components';
 
@@ -11,7 +11,7 @@ import { formTypes } from 'constants/layouts/loginRegister';
 import { formValidations } from 'utils';
 
 import * as S from 'styles/Pages/Register';
-import { registerUser } from 'store/userSlice';
+import axios from 'axios';
 
 interface IFormInputs {
   fullname: string;
@@ -22,7 +22,6 @@ interface IFormInputs {
 
 const Register = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
 
   const validationSchema = yup
     .object()
@@ -49,12 +48,13 @@ const Register = () => {
       password: data.password,
     };
     try {
-      // const response = await axios.post('/users/register', User);
-      // history.push('/login');
-      // console.log(response.data.message);
-      dispatch(registerUser(User));
+      const response = await axios.post('/users/register', User);
+      setTimeout(() => {
+        history.push('/login');
+      }, 3000);
+      toast.success(response.data.message);
     } catch (error) {
-      console.log((error as any).response.data.message);
+      toast.error((error as any).response.data.message);
     }
   };
 
@@ -95,6 +95,7 @@ const Register = () => {
           hasValue={watch('passwordConfirmation')}
         />
         <Button data-testid="registerBtn">Register</Button>
+
         <S.Redirect>
           Already have Account ?
           <Link to="/login">

@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useCookies } from 'react-cookie';
 
 import { Button, Input } from 'components';
 
@@ -11,11 +13,10 @@ import LoginRegister from 'layouts/LoginRegister/LoginRegister';
 import { formValidations } from 'utils';
 
 import * as S from 'styles/Pages/Register';
-import { useAppDispatch } from 'store';
 
 const Login = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
+  const [cookies, setCookie] = useCookies(['users']);
 
   interface IFormInputs {
     fullname: string;
@@ -46,10 +47,13 @@ const Login = () => {
     };
     try {
       const response = await axios.post('/users/login', User);
-      history.push('/homepage');
-      console.log(response.data);
+      setTimeout(() => {
+        history.push('/home');
+      }, 3000);
+      toast.success(response.data.message);
+      setCookie('users', response.data, { path: '/' });
     } catch (error) {
-      console.log((error as any).response.data.message);
+      toast.error((error as any).response.data.message);
     }
   };
   return (
