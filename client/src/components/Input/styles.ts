@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ForwardedRef } from 'react';
 
-import { Eye, HidedEye } from 'Icons';
+import { Eye, HidedEye } from 'icons';
 
 import { colors } from 'theme';
 
