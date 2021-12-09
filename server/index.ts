@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoute = require('./router/userRouter');
+import todoRoute from './router/todoRouter';
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ connection.once('open', () => {
 });
 
 app.use('/users', userRoute);
+app.use('/todos', todoRoute);
 
 app.listen(port, () => {
   console.log(`🚀 App listening on the port ${port}`);

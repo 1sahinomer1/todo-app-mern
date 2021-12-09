@@ -76,7 +76,7 @@ const Login = () => {
           hasValue={watch('password')}
         />
 
-        <Button>Login</Button>
+        <Button data-testid="loginBtn">Login</Button>
         <S.Redirect>
           Don't you have an account ?
           <Link to="/register">
