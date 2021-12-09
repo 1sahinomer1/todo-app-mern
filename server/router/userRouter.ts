@@ -28,12 +28,10 @@ router.post('/register', async (req, res) => {
       password: passwordHash,
     });
     await newUser.save();
-    return res
-      .status(201)
-      .json({
-        message:
-          'User registration is successful.You are redirected to the login page.',
-      });
+    return res.status(201).json({
+      message:
+        'User registration is successful.You are redirected to the login page.',
+    });
   } catch (err) {
     return res.status(500).json({ message: 'User could not be registered.' });
   }
