@@ -14,7 +14,7 @@ const Navbar = () => {
   };
   return (
     <S.Navbar>
-      <p>Welcome {cookies.users.user.name} !</p>
+      <p datatest-id="welcomeText">Welcome {cookies.users.user.name} !</p>
       <S.StyledDoor onClick={logout}>cikis yap </S.StyledDoor>
     </S.Navbar>
   );

@@ -31,6 +31,7 @@ const LoginRegister = ({ formType, children }: LoginRegisterLayoutProps) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        data-testid="toast"
       />
     </S.Container>
   );
