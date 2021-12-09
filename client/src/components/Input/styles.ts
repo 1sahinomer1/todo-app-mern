@@ -6,7 +6,7 @@ import { Eye, HidedEye } from 'icons';
 import { colors } from 'theme';
 
 interface InputContainerProps {
-  hasValue: string;
+  hasValue?: string;
   error: string | undefined;
 }
 interface InputProps {
